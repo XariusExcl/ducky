@@ -14,20 +14,15 @@ public class CoupelleController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        _direction = new Vector3(
-            Input.GetAxis("Horizontal") * speed,
-            0f,
-            Input.GetAxis("Vertical") * speed
-        );
 
-        // transform.position += _direction * Time.deltaTime;
-    }
-        
     void FixedUpdate()
     {
-        _rb.MovePosition(transform.position + _direction * Time.fixedDeltaTime);
+        _direction = new Vector3(
+            Input.GetAxis("Horizontal") * speed * Time.fixedDeltaTime,
+            0f,
+            Input.GetAxis("Vertical") * speed * Time.fixedDeltaTime
+        );
+
+        _rb.MovePosition(transform.position + _direction);
     }
 }
